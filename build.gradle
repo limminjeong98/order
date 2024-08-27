@@ -30,6 +30,7 @@ dependencies {
 
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'com.google.guava:guava:28.2-jre'
 
     compileOnly 'org.projectlombok:lombok'
 
