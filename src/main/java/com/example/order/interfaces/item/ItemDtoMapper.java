@@ -1,7 +1,7 @@
 package com.example.order.interfaces.item;
 
-import com.example.order.domain.order.ItemCommand;
-import com.example.order.domain.order.ItemInfo;
+import com.example.order.domain.item.ItemCommand;
+import com.example.order.domain.item.ItemInfo;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, unmappedTargetPolicy = ReportingPolicy.ERROR)

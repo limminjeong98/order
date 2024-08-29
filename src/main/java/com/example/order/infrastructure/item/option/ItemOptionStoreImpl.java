@@ -1,7 +1,7 @@
 package com.example.order.infrastructure.item.option;
 
-import com.example.order.domain.order.option.ItemOption;
-import com.example.order.domain.order.option.ItemOptionStore;
+import com.example.order.domain.item.option.ItemOption;
+import com.example.order.domain.item.option.ItemOptionStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package com.example.order.application.item;
 
 import com.example.order.domain.notification.NotificationService;
-import com.example.order.domain.order.ItemCommand;
-import com.example.order.domain.order.ItemInfo;
-import com.example.order.domain.order.ItemService;
+import com.example.order.domain.item.ItemCommand;
+import com.example.order.domain.item.ItemInfo;
+import com.example.order.domain.item.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.order.domain.order;
+package com.example.order.domain.item;
 
 import com.example.order.domain.partner.PartnerReader;
 import lombok.RequiredArgsConstructor;

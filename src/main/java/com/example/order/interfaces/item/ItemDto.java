@@ -1,6 +1,6 @@
 package com.example.order.interfaces.item;
 
-import com.example.order.domain.order.Item;
+import com.example.order.domain.item.Item;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

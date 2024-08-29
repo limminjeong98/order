@@ -1,11 +1,11 @@
 package com.example.order.infrastructure.item;
 
-import com.example.order.domain.order.Item;
-import com.example.order.domain.order.ItemCommand;
-import com.example.order.domain.order.ItemOptionSeriesFactory;
-import com.example.order.domain.order.option.ItemOptionStore;
-import com.example.order.domain.order.optiongroup.ItemOptionGroup;
-import com.example.order.domain.order.optiongroup.ItemOptionGroupStore;
+import com.example.order.domain.item.Item;
+import com.example.order.domain.item.ItemCommand;
+import com.example.order.domain.item.ItemOptionSeriesFactory;
+import com.example.order.domain.item.option.ItemOptionStore;
+import com.example.order.domain.item.optiongroup.ItemOptionGroup;
+import com.example.order.domain.item.optiongroup.ItemOptionGroupStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

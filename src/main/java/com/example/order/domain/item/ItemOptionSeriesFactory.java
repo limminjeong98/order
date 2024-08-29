@@ -1,6 +1,6 @@
-package com.example.order.domain.order;
+package com.example.order.domain.item;
 
-import com.example.order.domain.order.optiongroup.ItemOptionGroup;
+import com.example.order.domain.item.optiongroup.ItemOptionGroup;
 
 import java.util.List;
 

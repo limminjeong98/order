@@ -1,7 +1,7 @@
-package com.example.order.domain.order;
+package com.example.order.domain.item;
 
-import com.example.order.domain.order.option.ItemOption;
-import com.example.order.domain.order.optiongroup.ItemOptionGroup;
+import com.example.order.domain.item.option.ItemOption;
+import com.example.order.domain.item.optiongroup.ItemOptionGroup;
 import lombok.Getter;
 import lombok.ToString;
 

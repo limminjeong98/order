@@ -1,8 +1,8 @@
 package com.example.order.infrastructure.item;
 
 import com.example.order.common.exception.InvalidParamException;
-import com.example.order.domain.order.Item;
-import com.example.order.domain.order.ItemStore;
+import com.example.order.domain.item.Item;
+import com.example.order.domain.item.ItemStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

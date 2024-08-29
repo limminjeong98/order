@@ -1,9 +1,9 @@
 package com.example.order.infrastructure.item;
 
 import com.example.order.common.exception.EntityNotFoundException;
-import com.example.order.domain.order.Item;
-import com.example.order.domain.order.ItemInfo;
-import com.example.order.domain.order.ItemReader;
+import com.example.order.domain.item.Item;
+import com.example.order.domain.item.ItemInfo;
+import com.example.order.domain.item.ItemReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.example.order.domain.order;
+package com.example.order.domain.item;
 
 import java.util.List;
 
