@@ -1,15 +1,13 @@
 package com.example.order.domain.order;
 
-import com.example.order.domain.order.option.ItemOption;
-import com.example.order.domain.order.option.ItemOptionStore;
-import com.example.order.domain.order.optiongroup.ItemOptionGroup;
-import com.example.order.domain.order.optiongroup.ItemOptionGroupStore;
 import com.example.order.domain.partner.PartnerReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
@@ -41,7 +39,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ItemInfo.Main retrieveItemInfo(String itemToken) {
-        return null;
+        var item = itemReader.getItemBy(itemToken);
+        var itemOptionGroupInfoList = itemReader.getItemOptionSeries(item);
+        return new ItemInfo.Main(item, itemOptionGroupInfoList);
     }
 }
