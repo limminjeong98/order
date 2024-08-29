@@ -13,29 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderStore orderStore;
-    private final ItemReader itemReader;
+    private final OrderItemSeriesFactory orderItemSeriesFactory;
 
     @Override
-    public String registerOrder(OrderCommand.RegisterOrder registerOrder) {
-        Order order = orderStore.store(registerOrder.toEntity());
-        registerOrder.getOrderItemList().forEach(
-                registerOrderItem -> {
-                    var item = itemReader.getItemBy(registerOrderItem.getItemToken());
-                    var initOrderItem = registerOrderItem.toEntity(order, item);
-                    var orderItem = orderStore.store(initOrderItem);
-
-                    registerOrderItem.getOrderItemOptionGroupList().forEach(
-                            registerOrderItemOptionGroup -> {
-                                var initOrderItemOptionGroup = registerOrderItemOptionGroup.toEntity(orderItem);
-                                var orderItemOptionGroup = orderStore.store(initOrderItemOptionGroup);
-
-                                registerOrderItemOptionGroup.getOrderItemOptionList().forEach(
-                                        registerOrderItemOption -> {
-                                            var initOrderItemOption = registerOrderItemOption.toEntity(orderItemOptionGroup);
-                                            orderStore.store(initOrderItemOption);
-                                        });
-                            });
-                });
+    public String registerOrder(OrderCommand.RegisterOrder requestOrder) {
+        Order order = orderStore.store(requestOrder.toEntity());
+        orderItemSeriesFactory.store(order, requestOrder);
         return order.getOrderToken();
     }
 }
