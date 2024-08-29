@@ -1,5 +1,9 @@
 package com.example.order.domain.order;
 
+import com.example.order.domain.order.option.ItemOption;
+import com.example.order.domain.order.option.ItemOptionStore;
+import com.example.order.domain.order.optiongroup.ItemOptionGroup;
+import com.example.order.domain.order.optiongroup.ItemOptionGroupStore;
 import com.example.order.domain.partner.PartnerReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,45 +17,14 @@ public class ItemServiceImpl implements ItemService {
     private final PartnerReader partnerReader;
     private final ItemStore itemStore;
     private final ItemReader itemReader;
-    private final ItemOptionGroupStore itemOptionGroupStore;
-    private final ItemOptionStore itemOptionStore;
+    private final ItemOptionSeriesFactory itemOptionSeriesFactory;
 
     @Override
     public String registerItem(ItemCommand.RegisterItemRequest request, String partnerToken) {
-
-        // 1. get partnerId
         var partner = partnerReader.getPartner(partnerToken);
-        var partnerId = partner.getId();
-
-        // 2. item store
-        var initItem = request.toEntity(partnerId);
+        var initItem = request.toEntity(partner.getId());
         var item = itemStore.store(initItem);
-
-        // 3. itemOptionGroup + itemOption store
-        request.getItemOptionGroupRequestList().forEach(requestItemOptionGroup -> {
-            // itemOptionGroup store
-            var initItemOptionGroup = ItemOptionGroup.builder()
-                    .item(item)
-                    .ordering(requestItemOptionGroup.getOrdering())
-                    .itemOptionGroupName(requestItemOptionGroup.getItemOptionGroupName())
-                    .build();
-            var itemOptionGroup = itemOptionGroupStore.store(initItemOptionGroup);
-
-            // itemOption store
-            requestItemOptionGroup.getItemOptionRequestList().forEach(
-                    requestItemOption -> {
-                        var initItemOption = ItemOption.builder()
-                                .itemOptionGroup(itemOptionGroup)
-                                .ordering(requestItemOption.getOrdering())
-                                .itemOptionName(requestItemOption.getItemOptionName())
-                                .itemOptionPrice(requestItemOption.getItemOptionPrice())
-                                .build();
-
-                        itemOptionStore.store(initItemOption);
-                    });
-        });
-
-        // 4. return itemToken
+        itemOptionSeriesFactory.store(request, item);
         return item.getItemToken();
     }
 
