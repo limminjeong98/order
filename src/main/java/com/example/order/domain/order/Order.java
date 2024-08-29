@@ -46,6 +46,18 @@ public class Order extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Getter
+    @RequiredArgsConstructor
+    public enum Status {
+        INIT("주문시작"),
+        ORDER_COMPLETE("주문완료"),
+        DELIVERY_PREPARE("배송준비"),
+        IN_DELIVERY("배송중"),
+        DELIVERY_COMPLETE("배송완료");
+
+        private final String description;
+    }
+
     @Builder
     public Order(
             Long userId,
@@ -79,15 +91,14 @@ public class Order extends AbstractEntity {
         this.status = Status.ORDER_COMPLETE;
     }
 
-    @Getter
-    @RequiredArgsConstructor
-    public enum Status {
-        INIT("주문시작"),
-        ORDER_COMPLETE("주문완료"),
-        DELIVERY_PREPARE("배송준비"),
-        IN_DELIVERY("배송중"),
-        DELIVERY_COMPLETE("배송완료");
-
-        private final String description;
+    public boolean isAlreadyPaymentComplete() {
+        switch (this.status) {
+            case ORDER_COMPLETE:
+            case DELIVERY_PREPARE:
+            case IN_DELIVERY:
+            case DELIVERY_COMPLETE:
+                return true;
+        }
+        return false;
     }
 }
