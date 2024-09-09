@@ -14,7 +14,7 @@ Content-Type: application/json
   "orderItemList": [
     {
       "orderCount": 2,
-      "itemToken": "itm_XqbL4h1l5mz1mnMZ",
+      "itemToken": "{{item-token}}",
       "itemName": "티셔츠",
       "itemPrice": "30000",
       "orderItemOptionGroupList": [
@@ -44,7 +44,7 @@ Content-Type: application/json
     },
     {
       "orderCount": 1,
-      "itemToken": "itm_qCPGVzwvLVmCoZs6",
+      "itemToken": "{{item-token}}",
       "itemName": "양말",
       "itemPrice": "10000",
       "orderItemOptionGroupList": [
@@ -75,16 +75,21 @@ Content-Type: application/json
   ]
 }
 
+> {%
+    client.global.set("order-token", response.body["data"]["orderToken"]);
+    client.log("order-token = " + client.global.get("order-token"));
+%}
+
 ### 주문 결제 처리
 POST http://localhost:8080/api/v1/orders/payment-order
 Content-Type: application/json
 
 {
-  "orderToken": "ord_lqAcdTqvORlU7ry3",
+  "orderToken": "{{order-token}}",
   "payMethod": "NAVER_PAY",
   "amount": "72000",
   "orderDescription": "주문테스트"
 }
 
 ### 주문 조회
-GET http://localhost:8080/api/v1/orders/ord_lqAcdTqvORlU7ry3
+GET http://localhost:8080/api/v1/orders/{{order-token}}

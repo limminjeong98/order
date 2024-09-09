@@ -7,3 +7,8 @@ Content-Type: application/json
   "businessNo": "1234123456",
   "email": "testemail@naver.com"
 }
+
+> {%
+    client.global.set("partner-token", response.body["data"]["partnerToken"]);
+    client.log("partner-token" + client.global.get("partner-token"));
+%}
