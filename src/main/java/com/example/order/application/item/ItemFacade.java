@@ -17,6 +17,7 @@ public class ItemFacade {
 
     public String registerItem(ItemCommand.RegisterItemRequest request, String partnerToken) {
         var itemToken = itemService.registerItem(request, partnerToken);
+        // FIXME: sendEmail 구현
         notificationService.sendEmail(null, null, null);
         return itemToken;
     }
